@@ -1,0 +1,7 @@
+<h1>Top 100 Movies</h1>
+
+<ol>
+  <% @movies.each do | movie | %>
+    <li><%= link_to movie.title, movie %> was produced by <%= link_to movie.production_company.name, movie.production_company %></li>
+  <% end %>
+</ol>
