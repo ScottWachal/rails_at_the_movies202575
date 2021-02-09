@@ -17,6 +17,12 @@
       <div class="container">
         <h1 class="title is-1"><%= link_to "Top Movies From IMDB", root_path %></h1>
         <%= yield %>
+
+        <% if controller_name == 'home' %>
+          There's no place like home.
+        <% else %>
+          <%= render partial: 'common/footer' %>
+        <% end %>
       </div>
     </section>
   </body>
