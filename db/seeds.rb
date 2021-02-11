@@ -1,7 +1,20 @@
 require "csv"
 
+Page.delete_all
 Movie.delete_all
 ProductionCompany.delete_all
+
+Page.create(
+  title:     "About Us",
+  content:   "This is all about the creators!  ME specifically.. im cool.. please think im cool.",
+  permalink: "about_us"
+)
+
+Page.create(
+  title:     "Information about our data",
+  content:   "We stole... umm.. borrowed the data from Kaggle.. which sounds like KRAGGLE!!",
+  permalink: "data_info"
+)
 
 # Rails.root...  ./db/top_movies.csv
 filename = Rails.root.join("db/top_movies.csv")
@@ -33,3 +46,4 @@ end
 
 puts "Created #{ProductionCompany.count} Production Companies."
 puts "Created #{Movie.count} Movies."
+puts "Created #{Page.count} Pages."
