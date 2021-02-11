@@ -2,5 +2,7 @@
 
 <%= render 'form', page: @page %>
 
-<%= link_to 'Show', @page %> |
-<%= link_to 'Back', pages_path %>
+<p class="mt-5">
+  <%= link_to @page.title, permalink_path(@page.permalink) %> |
+  <%= link_to 'Back', pages_path %>
+</p>
