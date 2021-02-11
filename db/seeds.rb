@@ -1,6 +1,8 @@
 require "csv"
 
 Page.delete_all
+MovieGenre.delete_all
+Genre.delete_all
 Movie.delete_all
 ProductionCompany.delete_all
 
@@ -38,7 +40,19 @@ movies.each do |m|
       average_vote: m["avg_vote"]
     )
 
-    puts "Invalid movie #{m['original_title']}" unless movie&.valid?
+    unless movie&.valid?
+      puts "Invalid movie #{m['original_title']}"
+      next
+    end
+
+    # split on the comma, remove the white spaces (trim and strip are the same BTW)
+    genres = m["genre"].split(",").map(&:strip)
+
+    genres.each do |genre_name|
+      genre = Genre.find_or_create_by(name: genre_name)
+
+      MovieGenre.create(movie: movie, genre: genre)
+    end
   else
     puts "Invalid Production Company: #{m['production_company']} for movie #{m['original_title']}"
   end
@@ -47,3 +61,5 @@ end
 puts "Created #{ProductionCompany.count} Production Companies."
 puts "Created #{Movie.count} Movies."
 puts "Created #{Page.count} Pages."
+puts "Created #{Genre.count} Genres."
+puts "Created #{MovieGenre.count} MovieGenres."
